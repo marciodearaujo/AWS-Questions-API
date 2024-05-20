@@ -1,0 +1,20 @@
+{
+  "name": "banco_de_questoes_aws",
+  "version": "1.0.0",
+  "description": "API REST para cadastro e consulta de questoes para a certificacao AWS CLF-C02",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "author": "Marcio de Araujo Bastos",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.6.1",
+    "mongoose": "^8.3.4",
+    "nodemon": "^3.1.0"
+  },
+  "type": "module"
+}
