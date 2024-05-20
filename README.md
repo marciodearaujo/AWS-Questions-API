@@ -3,8 +3,9 @@ REST NODE JS API that creates, reads, updates and deletes aws CLF-C02 certificat
 # Objective
 This project aims to connect students from course DIO AWS CLF-C02 certification who want to practice for the exam through questions produced by the group itself.
 # Fast test
-<p>Test the project access the url to <a href="http://ec2-54-162-138-29.compute-1.amazonaws.com/question" target="_blank">get all questions</a> from database</p>
-# How can i use this project.
+<p>Test the project accessing the url to <a href="http://ec2-54-162-138-29.compute-1.amazonaws.com/question" target="_blank">get all questions</a> from database</p>
+
+# How can i use this project
 This project is a docker container running on a AWS EC2 instance and can be access through endpoints:
 <ul>
   <li>CREATE A QUESTION</li>
