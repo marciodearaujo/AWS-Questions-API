@@ -1,32 +1,31 @@
 import mongoose from "mongoose"
 const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
+
 
 const questionSchema = new Schema({
-    enunciation: {
+    question: {
         type:String,
-        required:[true,"O campo enunciation é obrigatório"],
-        min:[5,"O campo enunciation não pode ter menos de 5 caracteres"]
+        required:[true,"The field question is required"],
         },       
     alternativeA:{
         type:String,
-        required:[true,"O campo alternativeA é obrigatório"]
+        required:[true,"The field alternativeA is required"]
     },
     alternativeB:{
         type:String,
-        required:[true,"O campo alternativeB é obrigatório"]
+        required:[true,"The field alternativeB is required"]
     },
     alternativeC:{
         type:String,
-        required:[true,"O campo alternativeC é obrigatório"],
+        required:[true,"The field alternativeC is required"],
     },
     alternativeD:{
         type:String,
-        required:[true,"O campo alternative Dé obrigatório"]
+        required:[true,"The field alternativeD is required"]
     },
     answer:{
         type:String,
-        required:[true,"O campo answer é obrigatório"],
+        required:[true,"The field answer is required"],
         enum:["A","B","C","D"]
     }
 

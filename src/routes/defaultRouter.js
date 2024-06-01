@@ -10,5 +10,6 @@ router
 .delete(defaultRouterController.routerNotFound)
 .options(defaultRouterController.routerNotFound)
 .head(defaultRouterController.routerNotFound)
+.post(defaultRouterController.routerNotFound)
 
 export default router

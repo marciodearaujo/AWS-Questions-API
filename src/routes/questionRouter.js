@@ -1,10 +1,25 @@
 import express from 'express';
 import questionCRUDController from '../controller/questionController.js';
+import jwt from 'jsonwebtoken'
 const router=express.Router()
+
+function verifyToken(req,res,next){
+    const token=req.headers.authentication
+    jwt.verify(token,process.env.PASSWORD,(err)=>{
+        if(err) return  res.status(401).json({
+                autorized:false,
+                message: "User not authorized"
+                })
+        else
+         next()
+        })       
+}
+
+
 
 router
  .route("/question")
- .post(questionCRUDController.create)
+ .post(verifyToken,questionCRUDController.create)
 
  router
  .route("/question")
@@ -16,11 +31,11 @@ router
 
  router
  .route("/question/:id")
- .patch(questionCRUDController.updateOne)
+ .patch(verifyToken,questionCRUDController.updateOne)
 
  router
  .route("/question/:id")
- .delete(questionCRUDController.deleteOne)
+ .delete(verifyToken,questionCRUDController.deleteOne)
 
  
  export default router;

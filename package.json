@@ -10,8 +10,11 @@
   "author": "Marcio de Araujo Bastos",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-iam": "^3.583.0",
+    "@aws-sdk/credential-providers": "^3.583.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.6.1",
     "mongoose": "^8.3.4",
     "nodemon": "^3.1.0"

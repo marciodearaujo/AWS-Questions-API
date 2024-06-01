@@ -1,8 +1,12 @@
 import mongoose from "mongoose"
-import {QuestionMongoRepository} from "../repository/questionRepository.js"
-import DocumentIdNotFoundError from "../myErros/DocumentIdNotFoundError.js"
+import QuestionMongoRepository from "../repository/questionRepository.js"
+import DocumentIdNotFoundError from "../apiErros/DocumentIdNotFoundError.js"
+
+
 
 const questionRepository=new QuestionMongoRepository()
+
+
 
 const questionCRUDControlller={
 
@@ -13,7 +17,7 @@ const questionCRUDControlller={
             res.status(200).json(createdQuestion)
         }catch(error){
             res.status(404).json({
-                error:error.message
+                message:error.message
             })
         }
         
@@ -21,7 +25,7 @@ const questionCRUDControlller={
 
     readAll:async (req,res)=>{
         const allquestions=await questionRepository.findAll()
-        res.status(200).json(allquestions)
+        res.status(200).json(allquestions)  
     },
 
     readOne:async (req,res)=>{
@@ -32,30 +36,30 @@ const questionCRUDControlller={
         }catch(error){
             if(error instanceof mongoose.Error.CastError)
                 res.status(400).json({
-                    error: error.message
+                    message: error.message
                 })
             if(error instanceof DocumentIdNotFoundError)
                 res.status(404).json({
-                    error: error.message
+                   message: error.message
                 })
         }
         
     },
 
     updateOne:async (req,res)=>{
-        const data=req.body
-        const id=req.params.id
+            const data=req.body
+            const id=req.params.id
         try{
-        const updateResult=await questionRepository.updateOne(id,data)
-        res.status(200).json(updateResult)
+            const updateResult=await questionRepository.updateOne(id,data)
+            res.status(200).json(updateResult)
         }catch(error){
             if(error instanceof mongoose.Error.CastError)
                 res.status(400).json({
-                    error: error.message
+                    message: error.message
             })
             else
              res.status(404).json({
-            error:error.message
+                message:error.message
              })
         }
     },
@@ -63,12 +67,12 @@ const questionCRUDControlller={
     deleteOne:async (req,res)=>{
         try{
             const deleteResult=await questionRepository.deleteOne(req.params.id)
-            res.status(200).json(deletedResult)
+            res.status(200).json(deleteResult)
         }
         catch(error){
             if(error instanceof mongoose.Error.CastError)
                 res.status(400).json({
-                    error: error.message
+                    message: error.message
                 })
         }
         

@@ -1,9 +1,11 @@
 const defaultRouterController={
+
     routerNotFound:(req,res)=>{
         res.status(404).json({
-            error:"Not Found"
+            error:"Route not Found"
         })
-    }
+  }
+  
 }
 
 export default defaultRouterController

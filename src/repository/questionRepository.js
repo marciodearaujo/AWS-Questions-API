@@ -1,7 +1,7 @@
 
 import QuestionSchema from "./schema/QuestionSchema.js"
-import mongoose, { mongo } from "mongoose"
-import DocumentIdNotFoundError from "../myErros/DocumentIdNotFoundError.js";
+import mongoose from "mongoose"
+import DocumentIdNotFoundError from "../apiErros/DocumentIdNotFoundError.js";
 
 
 class QuestionMongoRepository{
@@ -10,10 +10,10 @@ class QuestionMongoRepository{
         const uri = "mongodb+srv://"+process.env.DB_USER+":"+process.env.PASSWORD+"@clusterclf-c02.crbiqpt.mongodb.net/"+process.env.DATABASE+"?retryWrites=true&w=majority&appName=ClusterCLF-C02";
         try{
             mongoose.connect(uri)
-            console.log("Conexao com o Atlas MongoDB estabelecida com sucesso!")
+            console.log("Atlas MongoDB connection success!")
               this.QuestionModel=mongoose.model("questions",QuestionSchema)
         }catch(error){
-            console.log("Erro ao conectar no banco de dados "+error)
+            console.log("Database not connected"+error)
         }
     
   }
@@ -43,9 +43,9 @@ async findAll(){
             throw new DocumentIdNotFoundError()
     }catch(error){
         if(error instanceof DocumentIdNotFoundError)
-            error.message="O documento de id "+id+" nao foi encontrado"
+            error.message="Document id "+id+" not found"
         else if(error instanceof mongoose.Error.CastError)
-            error.message="O parâmetro id nao é válido"
+            error.message="Parameter "+error.path+" is not valid"
         throw error
     }
     
@@ -53,13 +53,13 @@ async findAll(){
 
  async updateOne(id,data){
     try{
-       const instance= new this.QuestionModel(data)
-        await instance.validate(data)
-        const updatedQuestion= await this.QuestionModel.updateOne({_id:id},{...data})
-        return updatedQuestion
+        const opts={ runValidators: true }
+        const instance= new this.QuestionModel(data)
+        const result= await this.QuestionModel.updateOne({_id:id},{...data},opts)
+        return result
     }catch(error){
        if(error instanceof mongoose.Error.CastError)
-            error.message="O parâmetro id nao é válido"
+            error.message="Parameter "+error.path+" is not valid"
         throw error
     }
     
@@ -71,7 +71,7 @@ async findAll(){
         return result
     }
     catch(error){
-        error.message="O parâmetro id nao é válido"
+        error.message="Parameter "+error.path+" is not valid"
         throw error
     }
     
@@ -79,6 +79,4 @@ async findAll(){
 
 }
 
-export {
-    QuestionMongoRepository
-}
+export default QuestionMongoRepository
